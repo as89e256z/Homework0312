@@ -10,7 +10,7 @@ namespace File
 {
     class CreateFolder
     {
-        static void Main(string[] args)
+        static void Create(string[] args)
         {
             string path = "C:\\Temp\\temp";
             DateTime beforDT = System.DateTime.Now;
