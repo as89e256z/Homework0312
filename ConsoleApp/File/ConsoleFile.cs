@@ -18,15 +18,10 @@ namespace Files
             string YN = "";//判斷User是否要繼續進行
             string order;//給User要用的方法選項
 
-/*            do
-            {
-                Console.WriteLine($"要使用的檔案路徑個數\n上限為二");
-                Parmeter_Number.add(Console.Read();
-            } while (true);*/
+
                 do
                 {
                     Console.WriteLine($"輸入要使用的檔案路徑{Option_one}\nC:\\Temp\\aaa.txt");
-                    //Parameter.Add(Console.ReadLine());
                     Option_one = Console.ReadLine();
                     Console.WriteLine($"輸入完成後檔案目的地{Option_two}\nD:\\Temp\\aaa.txt");
                     Option_two = Console.ReadLine();
