@@ -6,30 +6,32 @@ using System.Threading.Tasks;
 using System.IO;
 
 
-namespace File
+namespace Files
 {
     class DeleteFile
     {
-        static void Delete(string[] args)
+        public static void Delete(string path1)
         {
+            string Newname = Path.GetDirectoryName(path1) + "\\" + Path.GetFileNameWithoutExtension(path1) + Path.GetExtension(path1);
+            /*Path.GetDirectoryName 目錄路徑(除去目標檔案的上一層路徑) Path.GetFileNameWithoutExtension 目標檔案(不附副檔名  Path.GetExtension 目標檔案的副檔名(只有副檔名*/
 
-            string path1 = "C:\\Temp\\aaa.txt";
-
-            do
+            if (Directory.Exists(Newname))
             {
-                Console.WriteLine("請按任意鍵繼續");
-                Console.ReadLine();
-                Console.ReadKey();
-                if (!Directory.Exists(path1))
-            {
-                Console.WriteLine($"{path1} doesn't exist;");
-                Console.ReadLine();
-                return;
+                do
+                {
+                    Newname = Path.GetDirectoryName(Newname) + "\\" + Path.GetFileNameWithoutExtension(Newname) + Path.GetExtension(Newname);
+                    Console.WriteLine($"{Newname} doesn't exist;");
+                    return;
+                } while (File.Exists(Newname));
             }
-                System.IO.File.Delete(path1);
-                Console.WriteLine("已完成刪除");
-            Console.ReadLine(); 
-            } while (true);
+            DateTime startTime = DateTime.Now;
+
+            File.Delete(path1);
+
+            DateTime endTime = DateTime.Now;
+            TimeSpan ts = endTime - startTime;
+            Console.WriteLine($"已刪除檔案{Newname}，共花費{ts.TotalSeconds}秒，按ENTER鍵繼續");
+
         }
     }
 }

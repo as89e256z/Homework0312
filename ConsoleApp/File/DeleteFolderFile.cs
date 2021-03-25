@@ -4,32 +4,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using System.Configuration;
+using System.Diagnostics;
+
+
 
 namespace Files
 {
-    class MoveFile
+    class DeleteFolderFile
     {
-        public static void Move(string path1, string path2)
-       {
-            string Newname = Path.GetDirectoryName(path2) + "\\" + Path.GetFileNameWithoutExtension(path2) + Path.GetExtension(path2);
+        
+        public static void DeleteFolder(string path1)
+        {
+            string Newname = Path.GetDirectoryName(path1) + "\\" + Path.GetFileNameWithoutExtension(path1) + Path.GetExtension(path1);
             /*Path.GetDirectoryName 目錄路徑(除去目標檔案的上一層路徑) Path.GetFileNameWithoutExtension 目標檔案(不附副檔名  Path.GetExtension 目標檔案的副檔名(只有副檔名*/
-            if (File.Exists(Newname))
+
+            if (!Directory.Exists(Newname))
             {
                 do
                 {
                     Newname = Path.GetDirectoryName(Newname) + "\\" + Path.GetFileNameWithoutExtension(Newname) + Path.GetExtension(Newname);
                     Console.WriteLine($"{Newname} doesn't exist;");
-                   
+                    return;
                 } while (File.Exists(Newname));
-                
             }
-            
             DateTime startTime = DateTime.Now;
-            File.Move(path1, path2);
+
+            Directory.Delete(Newname);
             DateTime endTime = DateTime.Now;
-            TimeSpan ts = endTime - startTime ;
-            Console.WriteLine($"已搬移檔案至{Newname}，共花費{ts.TotalSeconds}秒，按ENTER鍵繼續");
+            TimeSpan ts = endTime - startTime;
+            Console.WriteLine($"已刪除資料夾{Newname}，共花費{ts.TotalSeconds}秒，按ENTER鍵繼續");
+
         }
     }
- }
+}
